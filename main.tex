@@ -1,0 +1,44 @@
+
+\documentclass[paper,twocolumn,twoside]{geophysics}
+% \documentclass[manuscript,new,endfloat]{geophysics}
+
+% --------------------------------------------------------------------------------------------------------------------------------
+
+
+% Packages
+% --------
+
+\usepackage[hidelinks]{hyperref}
+
+\makeatletter
+\renewcommand\@makefntext[1]{%
+\noindent\makebox[0em][l]{\@makefnmark}#1}
+\makeatother
+
+% --------------------------------------------------------------------------------------------------------------------------------
+
+% Configurations
+% --------------
+
+\urlstyle{same}
+
+\renewcommand{\thefootnote}{\fnsymbol{footnote}} 
+
+% --------------------------------------------------------------------------------------------------------------------------------
+
+\begin{document}
+
+\input{title}
+
+\input{address-and-authors}
+
+\input{foothead}
+
+\input{abstract}
+
+\input{content}
+
+\bibliographystyle{seg}
+\bibliography{references.bib}
+
+\end{document}
