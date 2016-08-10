@@ -66,7 +66,12 @@
 \ExecuteOptions{paper,onecolumn,long,noendfloat,new,nonreprod}
 \ProcessOptions*
 \ifthenelse{\boolean{@twoc}}{%
-  \LoadClass[9pt]{article}}{%
+  % MY NEW OPTIONS FOR TWO COLUMNS VERSION
+  \usepackage{times}
+  \LoadClass[9pt]{article}
+  \renewcommand{\normalsize}{\small}
+  \fboxrule=1pt
+}{%
   \LoadClass[11pt]{article}}
 \RequirePackage{seg}
 \ifthenelse{\boolean{@repr}}{\RequirePackage{attachfile2}}{}
@@ -311,7 +316,8 @@
 \ifthenelse{\boolean{@manu}}{
   \renewcommand{\baselinestretch}{2.0}
 }{
-  \renewcommand{\baselinestretch}{1.0}
+  %\renewcommand{\baselinestretch}{1.0}
+  \renewcommand{\baselinestretch}{1.05}
 }
 \ifthenelse{\boolean{@twoc}}{%
 \setlength\parindent{1em}
@@ -450,14 +456,47 @@
 {
   \newsavebox{\seg@abstract}
   \setlength{\fboxsep}{10pt}
+
+% ****** ORIGINAL ABSTRACT ENVIRONMENT ******
+
+%  \renewenvironment{abstract}{
+%    \ifthenelse{\boolean{@twoc}}{%
+%      \twocolumn[\vspace{1.8in}\seg@author]\footnotetext{\protect\seg@address}%
+%    }{\vspace{0.3in}\seg@author}
+%    \begin{lrbox}{\seg@abstract}\begin{minipage}{0.96\textwidth} % ********* RICARDO ********* (0.95\columnwidth to textwidth)
+%    %\begin{lrbox}{\seg@abstract}\begin{minipage}{0.95\columnwidth} % ********* ORIGINAL ***********
+%         \centerline{\ifthenelse{\boolean{@twoc}}{}{\Large}\textbf{ABSTRACT}}\medskip}{%
+%    \medskip\end{minipage}\end{lrbox}%
+%    %\ifthenelse{\boolean{@shrt}}{}{\twocolumn[\noindent\fbox{\usebox{\seg@abstract}}\vspace{0.3in}]}} ******** Ricardo ******
+%    \ifthenelse{\boolean{@shrt}}{}{\noindent\fbox{\usebox{\seg@abstract}}}} % ********* ORIGINAL ***********
+
+% ****** MY MODIFIED ABSTRACT ENVIRONMENT ******
+
+  \RequirePackage{multicol}
+  \setcounter{footnote}{1}
+  \renewcommand\@makefntext{\noindent\makebox[0em][l]{\@makefnmark}}
   \renewenvironment{abstract}{
-    \ifthenelse{\boolean{@twoc}}{%
-      \twocolumn[\vspace{1.8in}\seg@author]\footnotetext{\protect\seg@address}%
-    }{\vspace{0.3in}\seg@author}
-    \begin{lrbox}{\seg@abstract}\begin{minipage}{0.95\columnwidth}%
-         \centerline{\ifthenelse{\boolean{@twoc}}{}{\Large}\textbf{ABSTRACT}}\medskip}{%
-    \medskip\end{minipage}\end{lrbox}%
-    \ifthenelse{\boolean{@shrt}}{}{\noindent\fbox{\usebox{\seg@abstract}}}}
+    
+    \begin{lrbox}{\seg@abstract}
+      \begin{minipage}{0.96\textwidth}
+        \begin{multicols}{2}%
+        \centerline{\ifthenelse{\boolean{@twoc}}{}{\Large}\textbf{ABSTRACT}}\medskip}{%
+        \end{multicols}
+      \end{minipage}
+    \end{lrbox}
+
+      \ifthenelse{\boolean{@twoc}}{%
+        \twocolumn[
+          \vspace{1.8in}\sffamily\seg@author
+          \ifthenelse{\boolean{@shrt}}{}{\noindent\fbox{\usebox{\seg@abstract}}}%
+          \vspace{0.4in}%
+        ]\footnotetext{\protect\seg@address}%
+      }{%
+        \vspace{0.3in}\seg@author
+        \ifthenelse{\boolean{@shrt}}{}{\noindent\fbox{\usebox{\seg@abstract}}}
+      }
+    }
+
 }
 \ifthenelse{\boolean{@manu}}
 {\pagestyle{plain}\thispagestyle{plain}}
