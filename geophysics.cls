@@ -68,6 +68,7 @@
 \ifthenelse{\boolean{@twoc}}{%
   % MY NEW OPTIONS FOR TWO COLUMNS VERSION
   \usepackage{times}
+  \usepackage{indentfirst}
   \LoadClass[9pt]{article}
   \renewcommand{\normalsize}{\small}
   \fboxrule=1pt
@@ -480,7 +481,7 @@
     \begin{lrbox}{\seg@abstract}
       \begin{minipage}{0.96\textwidth}
         \begin{multicols}{2}%
-        \centerline{\ifthenelse{\boolean{@twoc}}{}{\Large}\textbf{ABSTRACT}}\medskip}{%
+        \centerline{\ifthenelse{\boolean{@twoc}}{}{\Large}\textbf{ABSTRACT}}\medskip\hspace{1em}}{%
         \end{multicols}
       \end{minipage}
     \end{lrbox}
