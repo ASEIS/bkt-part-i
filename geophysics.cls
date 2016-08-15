@@ -471,19 +471,19 @@
 %    %\ifthenelse{\boolean{@shrt}}{}{\twocolumn[\noindent\fbox{\usebox{\seg@abstract}}\vspace{0.3in}]}} ******** Ricardo ******
 %    \ifthenelse{\boolean{@shrt}}{}{\noindent\fbox{\usebox{\seg@abstract}}}} % ********* ORIGINAL ***********
 
-% ****** MY MODIFIED ABSTRACT ENVIRONMENT ******
+% ****** START: MY MODIFIED ABSTRACT ENVIRONMENT ******
 
   \RequirePackage{multicol}
   \setcounter{footnote}{1}
   \renewcommand\@makefntext{\noindent\makebox[0em][l]{\@makefnmark}}
   \renewenvironment{abstract}{
     
-    \begin{lrbox}{\seg@abstract}
-      \begin{minipage}{0.96\textwidth}
+    \begin{lrbox}{\seg@abstract}%
+      \begin{minipage}{0.96\textwidth}%
         \begin{multicols}{2}%
-        \centerline{\ifthenelse{\boolean{@twoc}}{}{\Large}\textbf{ABSTRACT}}\medskip\hspace{1em}}{%
-        \end{multicols}
-      \end{minipage}
+        \centerline{\ifthenelse{\boolean{@twoc}}{}{\Large}\textbf{ABSTRACT}}\medskip}{%
+        \end{multicols}%
+      \end{minipage}%
     \end{lrbox}
 
       \ifthenelse{\boolean{@twoc}}{%
@@ -497,6 +497,8 @@
         \ifthenelse{\boolean{@shrt}}{}{\noindent\fbox{\usebox{\seg@abstract}}}
       }
     }
+
+% ****** END: MY MODIFIED ABSTRACT ENVIRONMENT ******
 
 }
 \ifthenelse{\boolean{@manu}}
